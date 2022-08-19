@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { withStyles } from "@mui/styles";
 import { SetProductdetails } from "../redux/Slices/ProductSlice";
+import { add } from "../redux/Slices/cartSlice";
 
 
 //import { setStatus } from './ProductSlice';
@@ -30,12 +31,13 @@ const GreenRadio = withStyles({
 
 function ProductDetails() {
   const { productId } = useParams();
-
+  //const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.Productdetails);
-  // const cartproduct = useSelector((state) => state.product.cartProducts);
-  // console.log(cartproduct?.length)
 
+  const products = useSelector((state) => state.product.Productdetails);
+  //const {cart} = useSelector((state) => state);
+    //  let x = cart.some((p) => p.id === products.id)
+    //  console.log(x)
 
 
 
@@ -58,6 +60,7 @@ function ProductDetails() {
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
 
   return (
     <div>
@@ -89,10 +92,10 @@ function ProductDetails() {
 
           <Grid item xs={2} sm={6} md={8}>
             <Item style={{ padding: "10px" }} className="itm">
-              <h2>{products?.title}</h2>
+              <h4>{products?.title}</h4>
               <p>{products?.description}</p>
-              <h3>₹{products?.price}</h3>
-              <h3>Qty:1</h3>
+              <h4>₹{products?.price}</h4>
+              <h4>Qty:1</h4>
 
               <div>
               <span>Select Size</span>
@@ -139,8 +142,8 @@ function ProductDetails() {
                   size="small"
                 />
               </div>
-
-              <Button variant="contained" color="secondary" onClick={()=>dispatch(SetcartProduct(productId))} >
+             
+              <Button variant="contained" color="secondary" onClick={()=>(dispatch(add(products)))} >
                 Add to cart
               </Button>
               <Button variant="contained" color="success" sx={{marginLeft:"4px"}}>

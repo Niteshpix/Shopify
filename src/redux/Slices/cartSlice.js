@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { STATUSES } from "../Constraints/Constraint";
+
 
 const initialState = [];
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  status: STATUSES.IDLE,
   reducers: {
     add(state, action) {
       state.push(action.payload);
@@ -19,5 +18,3 @@ const cartSlice = createSlice({
 
 export const { add, remove } = cartSlice.actions;
 export default cartSlice.reducer;
-
-

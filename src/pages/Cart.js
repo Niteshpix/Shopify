@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/CartItem";
 import { Link } from "react-router-dom";
+import "../components/index.css";
 
 const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const { cart } = useSelector((state) => state);
+
   useEffect(() => {
     setTotalAmount(cart.reduce((acc, curr) => acc + curr.price, 0));
   }, [cart]);
@@ -13,14 +15,14 @@ const Cart = () => {
     <>
       {cart.length > 0 ? (
         <>
-          <div className="min-h-[80vh] grid md:grid-cols-2 max-w-6xl mx-auto">
-            <div className="flex flex-col justify-center items-between p-2">
-              {cart.map((item) => {
-                return <CartItem key={item.id} item={item} />;
+          <div className="row">
+            <div className="col-6">
+              {cart.map((item, id) => {
+                return <CartItem key={id} item={item} />;
               })}
             </div>
             <div>
-              <div className="flex flex-col justify-center items-end p-5 space-y-5 mt-14">
+              <div className="summry">
                 <h1 className="font-semibold text-lg text-purple-800">
                   YOUR CART SUMMARY
                 </h1>
@@ -37,9 +39,11 @@ const Cart = () => {
                   </span>{" "}
                   : ${totalAmount}
                 </p>
-                <button className="bg-purple-700 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-purple-600 font-bold hover:text-purple-700 p-3">
-                  Checkout Now
-                </button>
+                <Link to={"/checkout"}>
+                  <button className="bg-purple-700 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-purple-600 font-bold hover:text-purple-700 p-3">
+                    Checkout Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

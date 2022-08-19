@@ -3,6 +3,16 @@ import { Delete } from "@mui/icons-material";
 import { remove } from "../redux/Slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
+import "./index.css";
+import { Box, Grid, Paper, styled } from "@mui/material";
+import Cart from "../pages/Cart";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "#fff",
+  ...theme.typography,
+  padding: theme.spacing,
+  color: theme.palette,
+}));
 
 const CartItem = ({ item }) => {
   const { cart } = useSelector((state) => state);
@@ -20,23 +30,29 @@ const CartItem = ({ item }) => {
 
   return (
     <>
-      <div className="flex items-center p-5 justify-between bg-violet-200 mt-2 mb-2 rounded-xl">
-        <div className="flex p-3">
-          <img src={item.image} className="h-28 rounded-lg" alt="" />
-          <div className="ml-10 self-start space-y-5">
-            <h1 className="text-xl text-purple-700 font-semibold">
-              {item.title}
-            </h1>
-            <p>${item.price}</p>
-          </div>
-        </div>
-        <div
-          onClick={removeItemFromCart}
-          className="bg-purple-300 hover:bg-purple-400 transition-transform duration-300 cursor-pointer rounded-full p-3 mr-3"
+      <Box sx={{ flexGrow: 1, marginTop: 3, paddingX: "10rem" }}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          <Delete className="text-gray-800" />
-        </div>
-      </div>
+          <Grid item xs={2} sm={6} md={6}>
+            <Item style={{ padding: "10px" }} className="itm">
+              <div onClick={removeItemFromCart} className="delete">
+                <Delete className="text-gray-800" />
+              </div>
+              <img
+                style={{ width: "150px", height: "160px" }}
+                src={item.image}
+                alt=""
+              />
+              <h4>{item.title}</h4>
+              <p>{item.description}</p>
+              <h5>₹{item.price}</h5>
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 };
