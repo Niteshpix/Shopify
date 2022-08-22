@@ -35,5 +35,29 @@
  margin-right: 600px;
     
 }
+.checkout {
+    text-align: center;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    
+  }
+  
+  * PROGRESS BAR */
+  .progressbar {
+    width: 400px;
+    height: 10px;
+    background-color: white;
+    margin-bottom: 50px;
+    border:"2px solid red"
+    
+  }
+  .progressbar div {
+    width: 33.3%;
+    height: 100%;
+    background-color: rgb(255, 106, 0);
+  }
 
-
+  
+  

@@ -10,6 +10,7 @@ import {
 import "./index.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Banner from "./Banner";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -44,9 +45,16 @@ function Navbar() {
                   Shopify
                 </Typography>
               </Link>
+              <Link to={"/login"}>
               <Button color="inherit">Login</Button>
-              <Button color="inherit">Register</Button>
+              </Link>
+
+              <Link to={"/signup"}>
+              <Button color="inherit">SignUp</Button>
+              </Link>
+
               <Button color="inherit">Services</Button>
+             
               <Link to={"/cart"}>
                 <Button color="inherit">
                   cart
@@ -57,10 +65,9 @@ function Navbar() {
           </AppBar>
         </div>
       </section>
+      <Banner/>
 
-      <section>
-        <div className="box"></div>
-      </section>
+      
     </div>
   );
 }

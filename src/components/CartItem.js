@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
 import "./index.css";
 import { Box, Grid, Paper, styled } from "@mui/material";
-import Cart from "../pages/Cart";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -18,7 +17,7 @@ const CartItem = ({ item }) => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const { enqueueSnackbar } = useSnackbar();
+  //const { enqueueSnackbar } = useSnackbar();
 
   const removeItemFromCart = () => {
     dispatch(remove(item.id));
