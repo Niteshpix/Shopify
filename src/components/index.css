@@ -59,5 +59,22 @@
     background-color: rgb(255, 106, 0);
   }
 
+  .styleform{
+    margin-top: 20px;
+
+    
+  }
+  .styleform input {
+    height: 35px;
+    width: 100%;
+    padding: 7px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    margin-bottom: 1rem;
+
+   
+  }
+
   
   

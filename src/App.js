@@ -6,12 +6,13 @@ import ProductDetails from "./components/ProductDetails";
 import Product from "./components/Product";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import Signup from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 
-const stripeTest = loadStripe('pk_test_51LZSJNSIxmhuOHarMsP4u9etP8oEcN7a1wz2vamCD8SeZW1cDz6QxOj2vsgo7bpViXnzm2Yd0bedYFQEYJRAGG1T00h5Q6jyE7')
+const stripeTest = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
 
 
@@ -30,6 +31,8 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+
           </Routes>
       </Router>
       </Elements>

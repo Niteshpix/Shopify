@@ -41,7 +41,7 @@ export function fetchProducts() {
   return async function fetchProductThunk(dispatch, getState) {
     dispatch(setStatus(STATUSES.LOADING));
     try {
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch(process.env.REACT_APP_PRODUCTS_URI);
       const data = await res.json();
       dispatch(setProducts(data));
       dispatch(setStatus(STATUSES.IDLE));

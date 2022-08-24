@@ -20,8 +20,6 @@ function Product() {
 
 
   //console.log(products);
-
-
   React.useEffect(() => {
     dispatch(fetchProducts());
   }, []);

@@ -5,6 +5,7 @@ export const ActionTypes = {
   ADD_QUANTITY: "ADD_QUANTITY",
   SUB_QUANTITY: "SUB_QUANTITY",
   EMPTY_CART: "EMPTY_CART",
+  LOGIN_USER: 'LOGIN_USER'
 };
 
 export const STATUSES = Object.freeze({
