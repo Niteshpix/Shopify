@@ -2,9 +2,9 @@ import React from "react";
 import { Delete } from "@mui/icons-material";
 import { remove } from "../redux/Slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useSnackbar } from "notistack";
 import "./index.css";
 import { Box, Grid, Paper, styled } from "@mui/material";
+import {ToastContainer, toast } from "react-toastify";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -14,21 +14,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CartItem = ({ item }) => {
-  const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  //const { enqueueSnackbar } = useSnackbar();
-
+  
   const removeItemFromCart = () => {
     dispatch(remove(item.id));
-    enqueueSnackbar(`Item removed from your cart!`, {
-      variant: "warning",
-      autoHideDuration: 3000,
-    });
+    toast.success("Item Removed", { position: "top-right" });
+  
   };
 
   return (
     <>
+    <ToastContainer/>
       <Box sx={{ flexGrow: 1, marginTop: 3, paddingX: "10rem" }}>
         <Grid
           container

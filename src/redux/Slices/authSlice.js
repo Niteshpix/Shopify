@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { registerUser } from "../Action";
+import { createSlice } from "@reduxjs/toolkit";
+import { getUser, loginUser, registerUser } from "../Action";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -21,7 +20,6 @@ const authSlice = createSlice({
   reducers: {
     loadUser(state, action) {
       const token = state.token;
-
       if (token) {
         const user = token;
         return {
@@ -33,11 +31,11 @@ const authSlice = createSlice({
           isAdmin: user.isAdmin,
           userLoaded: true,
         };
-      } else return { ...state, userLoaded:true };
+      } else return { ...state, userLoaded: true };
     },
-    logoutUser(state, action) {
-      localStorage.removeItem("token");
 
+    logoutUser(state) {
+      localStorage.removeItem("token");
       return {
         ...state,
         token: "",
@@ -60,7 +58,6 @@ const authSlice = createSlice({
     builder.addCase(registerUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = action.payload;
-        console.log(user)
         return {
           ...state,
           token: action.payload,
@@ -68,7 +65,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           isAdmin: user.isAdmin,
-          registerStatus: "success",
+          registerStatus: action.payload,
         };
       } else return state;
     });
@@ -76,68 +73,72 @@ const authSlice = createSlice({
     builder.addCase(registerUser.rejected, (state, action) => {
       return {
         ...state,
-        registerStatus: "rejected",
+        registerStatus: action.payload,
         registerError: action.payload,
       };
     });
-  
 
+    // login extra reducers
+    builder.addCase(loginUser.pending,  (state, action) => {
+      return { ...state, loginStatus: "pending" };
+    });
 
-  // login extra reducers
-  builder.addCase(loginUser.pending, (state, action) => {
-    return { ...state, loginStatus: "pending" };
-  });
-  
-  builder.addCase(loginUser.fulfilled, (state, action) => {
-    if (action.payload) {
-      const user = action.payload;
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        const user = action.payload;
+        return {
+          ...state,
+          token: action.payload,
+          name: user.name,
+          email: user.email,
+          _id: user._id,
+          isAdmin: user.isAdmin,
+          loginStatus: "success",
+        };
+      } else return state;
+    });
+
+    builder.addCase(loginUser.rejected, (state, action) => {
       return {
         ...state,
-        token: action.payload,
-        name: user.name,
-        email: user.email,
-        _id: user._id,
-        isAdmin: user.isAdmin,
-        loginStatus: "success",
+        loginStatus: "rejected",
+        loginError: action.payload,
       };
-    } else return state;
-  });
+    });
 
-  builder.addCase(loginUser.rejected, (state, action) => {
-    return {
-      ...state,
-      loginStatus: "rejected",
-      loginError: action.payload,
-    };
-  })
-
-
-}
+    //
+    builder.addCase(getUser.pending, (state, action) => {
+      return {
+        ...state,
+        getUserStatus: "pending",
+      };
+    });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        const user = action.payload;
+        
+        console.log(user);
+        return {
+          ...state,
+          token: action.payload,
+          name: user.name,
+          email: user.email,
+          _id: user._id,
+          isAdmin: user.isAdmin,
+          getUserStatus: "success",
+        };
+      } else return state;
+    });
+    builder.addCase(getUser.rejected, (state, action) => {
+      return {
+        ...state,
+        getUserStatus: "rejected",
+        getUserError: action.payload,
+      };
+    });
+  },
 });
 
-
-
-export const { loadUser } = authSlice.actions;
+export const { loadUser, logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;
-
-
-
-
-export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async (values, { rejectWithValue }) => {
-    try {
-      const token = await axios.post(process.env.REACT_APP_SIGNIN_API, {
-        email: values.email,
-        password: values.password,
-      });
-
-      localStorage.setItem("token", token.data);
-      return token.data;
-    } catch (error) {
-      console.log(error.response);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);

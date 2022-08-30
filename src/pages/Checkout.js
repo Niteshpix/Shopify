@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Information from "./Information";
 import "../components/index.css";
+import Cart from "./Cart";
 
 function Checkout() {
   const [page, setPage] = useState(0);
@@ -38,16 +39,11 @@ function Checkout() {
 
   return (
     <div className="checkout">
-      <div
-        className="progressbar"
-        style={{ width: "400px", height: "10px", margin: "auto " }}
-      >
-        <div
-          style={{ width: page === 0 ? "50%" : page === 1 ? "100%" : "100%" }}
-        ></div>
+      <div className="form-container">
+      <div className="progressbar" style={{ width: "400px", height: "10px", margin: "auto " }}>
+      <div style={{ width: page === 0 ? "50%" : page === 1 ? "100%" : "100%" }}></div>
       </div>
 
-      <div className="form-container">
         <div className="header">
           <h1>{FormTitles[page]}</h1>
         </div>

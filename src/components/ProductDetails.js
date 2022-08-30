@@ -3,12 +3,11 @@ import Grid from "@mui/material/Grid";
 import Product from "./Product";
 import { Box, Button, Paper, Radio, styled } from "@mui/material";
 import { green } from "@mui/material/colors";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { withStyles } from "@mui/styles";
 import { SetProductdetails } from "../redux/Slices/ProductSlice";
 import { add } from "../redux/Slices/cartSlice";
-
 
 //import { setStatus } from './ProductSlice';
 
@@ -36,10 +35,8 @@ function ProductDetails() {
 
   const products = useSelector((state) => state.product.Productdetails);
   //const {cart} = useSelector((state) => state);
-    //  let x = cart.some((p) => p.id === products.id)
-    //  console.log(x)
-
-
+  //  let x = cart.some((p) => p.id === products.id)
+  //  console.log(x)
 
   const fetchProductDetails = async (id) => {
     const res = await fetch(`https://fakestoreapi.com/products/${id}`);
@@ -61,10 +58,9 @@ function ProductDetails() {
     setSelectedValue(event.target.value);
   };
 
-
   return (
     <div>
-      <Box sx={{ flexGrow: 1, marginTop:3, paddingX: "10rem" }}>
+      <Box sx={{ flexGrow: 1, marginTop: 3, paddingX: "10rem" }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -98,7 +94,7 @@ function ProductDetails() {
               <h4>Qty:1</h4>
 
               <div>
-              <span>Select Size</span>
+                <span>Select Size</span>
                 <Radio
                   checked={selectedValue === "a"}
                   onChange={handleChange}
@@ -142,18 +138,28 @@ function ProductDetails() {
                   size="small"
                 />
               </div>
-             
-              <Button variant="contained" color="secondary" onClick={()=>(dispatch(add(products)))} >
+
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => dispatch(add(products))}
+              >
                 Add to cart
               </Button>
-              <Button variant="contained" color="success" sx={{marginLeft:"4px"}}>
-                Checkout
-            </Button>
+              <Link to={"/checkout"}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ marginLeft: "4px" }}
+                >
+                  Checkout
+                </Button>
+              </Link>
             </Item>
           </Grid>
         </Grid>
         <h1>Related Products</h1>
-        <Product/>
+        <Product />
       </Box>
     </div>
   );

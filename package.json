@@ -17,7 +17,9 @@
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "firebase": "^9.9.3",
     "formik": "^2.2.9",
+    "gapi-script": "^1.2.0",
     "geonames": "^0.2.1",
     "geonames.js": "^3.0.6",
     "joi": "^17.6.0",
@@ -28,13 +30,18 @@
     "postcss": "^8.4.13",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
     "react-hook-form": "^7.34.2",
     "react-redux": "^8.0.1",
+    "react-redux-firebase": "^3.11.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^6.1.2",
-    "tailwindcss": "^3.0.24"
+    "react-toastify": "^9.0.8",
+    "tailwindcss": "^3.0.24",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start"
