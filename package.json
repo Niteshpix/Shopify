@@ -22,6 +22,7 @@
     "gapi-script": "^1.2.0",
     "geonames": "^0.2.1",
     "geonames.js": "^3.0.6",
+    "google-map-react": "^2.2.0",
     "joi": "^17.6.0",
     "joy": "^0.1.1",
     "jwt-decode": "^3.1.2",

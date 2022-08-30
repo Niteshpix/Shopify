@@ -75,12 +75,34 @@ function Login() {
     //console.log("success:", res.profileObj);
     setProfile(res.profileObj);
     //navigate("/dashboard")
-  
   };
   const onFailure = (err) => {
     console.log("failed:", err);
   };
 
+
+  {/*
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>  */}
 
   const responseFacebook = (response) => {
     console.log(response);
@@ -102,7 +124,7 @@ function Login() {
             <Avatar style={avatarStyle}></Avatar>
             <div style={{ marginTop: "12px"}}>
               <ReactFacebookLogin
-              appId="921201001964201"
+              appId="1098101744147998"
               autoLoad={true}
               fields="name,email,picture"
               scope="public_profile,user_friends"
